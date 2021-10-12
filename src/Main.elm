@@ -7,6 +7,15 @@ import Html.Events exposing (onInput)
 
 
 
+-- MAIN
+
+
+main : Program () Model Msg
+main =
+    Browser.sandbox { init = model, update = update, view = view }
+
+
+
 -- MODEL
 
 
@@ -50,6 +59,10 @@ update msg store =
             { store | rePassword = rePassword }
 
 
+
+-- VIEW
+
+
 view : Model -> Html Msg
 view store =
     div []
@@ -64,7 +77,3 @@ view store =
 viewInput : String -> String -> String -> (String -> msg) -> Html msg
 viewInput t p v toMsg =
     input [ type_ t, placeholder p, value v, onInput toMsg ] []
-
-
-main =
-    Browser.sandbox { init = model, update = update, view = view }
