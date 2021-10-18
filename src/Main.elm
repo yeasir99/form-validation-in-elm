@@ -12,7 +12,7 @@ import Html.Events exposing (onInput)
 
 main : Program () Model Msg
 main =
-    Browser.sandbox { init = model, update = update, view = view }
+    Browser.sandbox { init = initialModel, update = update, view = view }
 
 
 
@@ -27,8 +27,8 @@ type alias Model =
     }
 
 
-model : Model
-model =
+initialModel : Model
+initialModel =
     Model "" "" "" ""
 
 
@@ -44,19 +44,19 @@ type Msg
 
 
 update : Msg -> Model -> Model
-update msg store =
+update msg model =
     case msg of
         Name name ->
-            { store | name = name }
+            { model | name = name }
 
         Email email ->
-            { store | email = email }
+            { model | email = email }
 
         Password password ->
-            { store | password = password }
+            { model | password = password }
 
         RePassword rePassword ->
-            { store | rePassword = rePassword }
+            { model | rePassword = rePassword }
 
 
 
@@ -64,13 +64,13 @@ update msg store =
 
 
 view : Model -> Html Msg
-view store =
+view model =
     div []
         [ h2 [] [ text "Contact Us" ]
-        , viewInput "text" "Name" store.name Name
-        , viewInput "text" "Email" store.email Email
-        , viewInput "password" "Password" store.password Password
-        , viewInput "password" "Re-enter Password" store.rePassword RePassword
+        , viewInput "text" "Name" model.name Name
+        , viewInput "text" "Email" model.email Email
+        , viewInput "password" "Password" model.password Password
+        , viewInput "password" "Re-enter Password" model.rePassword RePassword
         ]
 
 
